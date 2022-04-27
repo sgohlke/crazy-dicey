@@ -1,0 +1,29 @@
+{
+  "name": "crazy-dicey",
+  "version": "1.0.0",
+  "description": "Example code to teach testing with Typescript/Jest",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit --pretty",
+    "test": "jest",
+    "testinit": "ts-jest config:init",
+    "tsinit": "tsc --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgohlke/crazy-dicey.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgohlke/crazy-dicey/issues"
+  },
+  "homepage": "https://github.com/sgohlke/crazy-dicey#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.6.3"
+  }
+}

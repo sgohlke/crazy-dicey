@@ -1,0 +1,24 @@
+name: Install and test crazy-dicey
+on: [push, pull_request]
+
+jobs:
+  crazydicey:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Check types
+        run: npm run check
+      - name: Check security vulnerabilites
+        run: npm audit
+        continue-on-error: true
+      - name: Check for outdated dependencies
+        run: npm outdated
+        continue-on-error: true
