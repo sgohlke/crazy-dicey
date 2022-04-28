@@ -1,4 +1,6 @@
 export const NUMBER_MUST_BE_POSITIVE_ERROR = new Error('Number of sides should be positive')
+export const ROUNDS_MUST_BE_POSITIVE_ERROR = new Error('Number of rounds should be positive')
+
 
 export class CrazyDicey {
     diceSides: number
@@ -25,10 +27,17 @@ export class CrazyDicey {
     }
 
     rollDiceAndSumResults(numberOfRounds: number = 1): number {
-        const results = this.rollDice(numberOfRounds)
-        return results.reduce(( previousValue, currentValue ) => previousValue + currentValue, 0)
-    }
+        if (numberOfRounds < 0) {
+            throw ROUNDS_MUST_BE_POSITIVE_ERROR
+        }
 
+        let sum = 0
+        for (let index = 0; index < numberOfRounds; index++) {
+            sum += this.generateRandomDiceRoll()
+        }
+        return sum
+
+    }
 
     rollDiceOnce(): number {
         return this.generateRandomDiceRoll()

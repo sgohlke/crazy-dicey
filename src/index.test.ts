@@ -1,13 +1,12 @@
-import { CrazyDicey, NUMBER_MUST_BE_POSITIVE_ERROR } from ".";
+import { CrazyDicey, NUMBER_MUST_BE_POSITIVE_ERROR, ROUNDS_MUST_BE_POSITIVE_ERROR } from ".";
 
 test("Create a CrazyDicey object with default six sides", () => {
-    // Given
-
-    // When
+    // Given/When
     const dicey = new CrazyDicey();
 
     // Then
     expect(dicey.diceSides).toBe(6);
+    //expect(dicey.diceSides).toBeDefined();
 });
 
 test.each(
@@ -21,14 +20,13 @@ test.each(
 
 test.each(
     [
-      -1, Number.NEGATIVE_INFINITY, 
+      -1, Number.NEGATIVE_INFINITY,
     ],
   )("Should not create a CrazyDicey object with %d sides and throw a fitting error", (sides) => {
     try {
         new CrazyDicey(sides);
     } catch (error) {
         expect(error).toBe(NUMBER_MUST_BE_POSITIVE_ERROR );
-
     }
   });
 
@@ -56,13 +54,13 @@ describe('Test rollDice with 3 rounds', () => {
   
     test('Should get the fitting result array when calling rollDice()', () => {
         // Given
-        const dicey = new CrazyDicey()
+        const dicey = new CrazyDicey(10)
 
         // When
         const results = dicey.rollDice(3)
 
         // Then
-        expect(results).toStrictEqual([1, 2, 3]);
+        expect(results).toStrictEqual([1, 2, 4]);
     });
 });
 
@@ -78,13 +76,13 @@ describe('Test rollDiceAndSumResults with 3 rounds', () => {
   
     test('Should get the fitting result array when calling rollDiceAndSumResults()', () => {
         // Given
-        const dicey = new CrazyDicey()
+        const dicey = new CrazyDicey(10)
 
         // When
         const result = dicey.rollDiceAndSumResults(3)
 
         // Then
-        expect(result).toStrictEqual(6);
+        expect(result).toStrictEqual(7);
     });
 });
 
@@ -120,6 +118,20 @@ test('Should get the fitting result array when calling rollDiceAndSumResults() w
     // Then
     expect(result).toBeGreaterThanOrEqual(1)
     expect(result).toBeLessThanOrEqual(6)
+});
+
+test('Should get a fitting error message when calling rollDiceAndSumResults() with a negative number of rounds', () => {
+    // Given
+    const dicey = new CrazyDicey()
+
+    // When
+    try {
+        dicey.rollDiceAndSumResults(-2)
+    } catch (error) {
+        if (error instanceof Error) {
+            expect(error.message).toBe(ROUNDS_MUST_BE_POSITIVE_ERROR.message)
+        }
+    }
 });
 
 
