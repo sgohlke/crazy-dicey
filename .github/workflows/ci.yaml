@@ -3,22 +3,24 @@ on: [push, pull_request]
 
 jobs:
   crazydicey:
+
     name: Check
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3.5.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3.5.0
         with:
-          node-version: '16.x'
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run tests
         run: npm test
       - name: Check types
         run: npm run check
-      - name: Check security vulnerabilites
-        run: npm audit
-        continue-on-error: true
-      - name: Check for outdated dependencies
-        run: npm outdated
-        continue-on-error: true
