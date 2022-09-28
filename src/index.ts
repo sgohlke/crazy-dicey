@@ -5,7 +5,7 @@ export const ROUNDS_MUST_BE_POSITIVE_ERROR = new Error('Number of rounds should 
 export class CrazyDicey {
     diceSides: number
 
-    constructor(diceSides: number = 6) {
+    constructor(diceSides = 6) {
         if (diceSides && diceSides > 0) {
             this.diceSides = diceSides
         } else {
@@ -18,7 +18,7 @@ export class CrazyDicey {
         return Math.ceil(randomNumber);
     }
 
-    rollDice(numberOfRounds: number = 1): Array<number> {
+    rollDice(numberOfRounds = 1): Array<number> {
         const results: Array<number> = []
         for (let round = 0; round < numberOfRounds; round++) {
             results.push(this.generateRandomDiceRoll())            
@@ -26,7 +26,7 @@ export class CrazyDicey {
         return results
     }
 
-    rollDiceAndSumResults(numberOfRounds: number = 1): number {
+    rollDiceAndSumResults(numberOfRounds = 1): number {
         if (numberOfRounds < 0) {
             throw ROUNDS_MUST_BE_POSITIVE_ERROR
         }
