@@ -1,11 +1,15 @@
+import { Player } from "./Player"
+
 export const NUMBER_MUST_BE_POSITIVE_ERROR = new Error('Number of sides should be positive')
 export const ROUNDS_MUST_BE_POSITIVE_ERROR = new Error('Number of rounds should be positive')
 
 
 export class CrazyDicey {
     diceSides: number
+    player: Player
 
-    constructor(diceSides = 6) {
+    constructor(diceSides = 6, player = new Player('player')) {
+        this.player = player;
         if (diceSides && diceSides > 0) {
             this.diceSides = diceSides
         } else {

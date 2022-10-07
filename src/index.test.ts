@@ -1,4 +1,5 @@
 import { CrazyDicey, NUMBER_MUST_BE_POSITIVE_ERROR, ROUNDS_MUST_BE_POSITIVE_ERROR } from ".";
+import { Player } from "./Player";
 
 test("Create a CrazyDicey object with default six sides", () => {
     // Given/When
@@ -134,7 +135,6 @@ test('Should get a fitting error message when calling rollDiceAndSumResults() wi
     }
 });
 
-
 describe('Test sayGoodbye without exiting the tests', () => {
     beforeAll(() => {
         jest.spyOn(process, "exit").mockImplementation();
@@ -158,3 +158,24 @@ describe('Test sayGoodbye without exiting the tests', () => {
         expect(console.info).toHaveBeenLastCalledWith('Goodbye');
     });
 });
+
+test('Will roll the dice once with a player', () => {
+    // Given
+    const player = new Player('Test Player')
+    //expect(Player).toHaveBeenCalledTimes(1);
+    const dicey = new CrazyDicey(6, player)
+
+    // When
+    const result = dicey.rollDiceOnce()
+
+    // Then
+    expect(result).toBeGreaterThanOrEqual(1)
+    expect(result).toBeLessThanOrEqual(6)
+
+    /**
+     * Player is not mocked and will correctly return "Test Player". 
+     * Though it is advised not to test/assert player functionality here as we want to test CrazyDicey here
+     *   */ 
+    // expect(player.getName()).toBe('Test Player')
+});
+
