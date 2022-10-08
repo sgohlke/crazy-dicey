@@ -1,5 +1,5 @@
-import { CrazyDicey } from ".";
-import { Player } from "./Player";
+import { CrazyDicey } from "."
+import { Player } from "./Player"
 jest.mock("./Player")
 
 test('Will roll the dice once with a strictly mocked player', () => {
@@ -15,4 +15,4 @@ test('Will roll the dice once with a strictly mocked player', () => {
     expect(result).toBeLessThanOrEqual(6)
     // Player is mocked so getName will always return undefined ()
     expect(player.getName()).toBe(undefined)
-});
+})

@@ -8,8 +8,8 @@ export class CrazyDicey {
     diceSides: number
     player: Player
 
-    constructor(diceSides = 6, player = new Player('player')) {
-        this.player = player;
+    constructor(diceSides = 6, player: Player = new Player('player')) {
+        this.player = player
         if (diceSides && diceSides > 0) {
             this.diceSides = diceSides
         } else {
@@ -19,7 +19,7 @@ export class CrazyDicey {
 
     generateRandomDiceRoll(): number {
         const randomNumber = Math.random() * this.diceSides
-        return Math.ceil(randomNumber);
+        return Math.ceil(randomNumber)
     }
 
     rollDice(numberOfRounds = 1): Array<number> {
@@ -40,7 +40,6 @@ export class CrazyDicey {
             sum += this.generateRandomDiceRoll()
         }
         return sum
-
     }
 
     rollDiceOnce(): number {
