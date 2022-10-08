@@ -7,6 +7,7 @@ test("Create a CrazyDicey object with default six sides", () => {
 
     // Then
     expect(dicey.diceSides).toBe(6);
+    // toBeDefined does not assume a specific result (only that the value is not undefined) and would be a "thin" quality of test
     //expect(dicey.diceSides).toBeDefined();
 });
 
@@ -156,13 +157,14 @@ describe('Test sayGoodbye without exiting the tests', () => {
         // Then
         expect(console.info).toHaveBeenCalledTimes(1);
         expect(console.info).toHaveBeenLastCalledWith('Goodbye');
+        expect(process.exit).toHaveBeenCalledTimes(1);
+        expect(process.exit).toHaveBeenLastCalledWith(0);
     });
 });
 
 test('Will roll the dice once with a player', () => {
     // Given
     const player = new Player('Test Player')
-    //expect(Player).toHaveBeenCalledTimes(1);
     const dicey = new CrazyDicey(6, player)
 
     // When
@@ -174,8 +176,7 @@ test('Will roll the dice once with a player', () => {
 
     /**
      * Player is not mocked and will correctly return "Test Player". 
-     * Though it is advised not to test/assert player functionality here as we want to test CrazyDicey here
+     * Though it is advised not to test/assert player functionality here as we want to test CrazyDicey in this test class
      *   */ 
     // expect(player.getName()).toBe('Test Player')
 });
-
