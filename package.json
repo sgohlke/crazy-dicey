@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/sgohlke/crazy-dicey#readme",
   "devDependencies": {
-    "@sgohlke/ts-base-dependencies": "1.0.14"
+    "@sgohlke/ts-base-dependencies": "1.0.15"
   }
 }
