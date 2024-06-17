@@ -1,5 +1,6 @@
 import { CrazyDicey, NUMBER_MUST_BE_POSITIVE_ERROR, ROUNDS_MUST_BE_POSITIVE_ERROR } from "."
 import { Player } from "./Player"
+import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest'
 
 test("Create a CrazyDicey object with default six sides", () => {
     // Given/When
@@ -46,11 +47,11 @@ test("Should get a random number between 1 and 6 when rollDiceOnce()", () => {
 
 describe('Test rollDice with 3 rounds', () => {
     beforeAll(() => {
-        jest.spyOn(global.Math, "random").mockReturnValueOnce(0.1).mockReturnValueOnce(0.2).mockReturnValueOnce(0.4)
+        vi.spyOn(Math, "random").mockReturnValueOnce(0.1).mockReturnValueOnce(0.2).mockReturnValueOnce(0.4)
     })
 
     afterAll(() => {
-        jest.restoreAllMocks()
+        vi.restoreAllMocks()
     })
   
   
@@ -68,11 +69,11 @@ describe('Test rollDice with 3 rounds', () => {
 
 describe('Test rollDiceAndSumResults with 3 rounds', () => {
     beforeAll(() => {
-        jest.spyOn(global.Math, "random").mockReturnValueOnce(0.1).mockReturnValueOnce(0.2).mockReturnValueOnce(0.4)
+        vi.spyOn(Math, "random").mockReturnValueOnce(0.1).mockReturnValueOnce(0.2).mockReturnValueOnce(0.4)
     })
 
     afterAll(() => {
-        jest.restoreAllMocks()
+        vi.restoreAllMocks()
     })
   
   
@@ -90,11 +91,11 @@ describe('Test rollDiceAndSumResults with 3 rounds', () => {
 
 describe('Test rollDice with 1 round', () => {
     beforeAll(() => {
-        jest.spyOn(global.Math, "random").mockReturnValueOnce(0.1)
+        vi.spyOn(Math, "random").mockReturnValueOnce(0.1)
     })
 
     afterAll(() => {
-        jest.restoreAllMocks()
+        vi.restoreAllMocks()
     })
   
   
@@ -138,12 +139,12 @@ test('Should get a fitting error message when calling rollDiceAndSumResults() wi
 
 describe('Test sayGoodbye without exiting the tests', () => {
     beforeAll(() => {
-        jest.spyOn(process, "exit").mockImplementation()
-        jest.spyOn(console, "info").mockImplementation()
+        vi.spyOn(process, "exit").mockImplementationOnce(() => {throw new Error('process.exit() was called')})
+        vi.spyOn(console, "info")
     })
 
     afterAll(() => {
-        jest.restoreAllMocks()
+        vi.restoreAllMocks()
     })
   
   
@@ -152,13 +153,19 @@ describe('Test sayGoodbye without exiting the tests', () => {
         const dicey = new CrazyDicey()
 
         // When
-        dicey.sayGoodbye()
-
-        // Then
-        expect(console.info).toHaveBeenCalledTimes(1)
-        expect(console.info).toHaveBeenLastCalledWith('Goodbye')
-        expect(process.exit).toHaveBeenCalledTimes(1)
-        expect(process.exit).toHaveBeenLastCalledWith(0)
+        try {
+            dicey.sayGoodbye()
+        } catch (error: unknown) {
+            // Then
+            if (error instanceof Error) {
+               expect(error.message).toBe('process.exit() was called')
+            }
+           
+            expect(console.info).toHaveBeenCalledTimes(1)
+            expect(console.info).toHaveBeenLastCalledWith('Goodbye')
+            expect(process.exit).toHaveBeenCalledTimes(1)
+            expect(process.exit).toHaveBeenLastCalledWith(0)
+        }
     })
 })
 

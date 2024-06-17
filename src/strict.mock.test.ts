@@ -1,6 +1,8 @@
 import { CrazyDicey } from "."
 import { Player } from "./Player"
-jest.mock("./Player")
+import { expect, test, vi } from 'vitest'
+
+vi.mock("./Player")
 
 test('Will roll the dice once with a strictly mocked player', () => {
     // Given
