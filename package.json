@@ -21,10 +21,10 @@
   "homepage": "https://github.com/sgohlke/crazy-dicey#readme",
   "devDependencies": {
     "@types/node": "24.10.1",
-    "@vitest/coverage-v8": "4.0.9",
-    "oxlint": "1.28.0",
+    "@vitest/coverage-v8": "4.0.13",
+    "oxlint": "1.29.0",
     "typescript": "5.9.3",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "4.0.9"
+    "vitest": "4.0.13"
   }
 }
