@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/sgohlke/crazy-dicey#readme",
   "devDependencies": {
-    "@types/node": "25.0.6",
-    "@vitest/coverage-v8": "4.0.16",
-    "oxlint": "1.38.0",
+    "@types/node": "25.0.9",
+    "@vitest/coverage-v8": "4.0.17",
+    "oxlint": "1.39.0",
     "typescript": "5.9.3",
     "vite-tsconfig-paths": "6.0.4",
-    "vitest": "4.0.16"
+    "vitest": "4.0.17"
   }
 }
