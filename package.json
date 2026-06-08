@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/sgohlke/crazy-dicey#readme",
   "devDependencies": {
-    "@types/node": "25.9.1",
+    "@types/node": "25.9.2",
     "@vitest/coverage-v8": "4.1.8",
     "oxlint": "1.68.0",
     "typescript": "6.0.3",
